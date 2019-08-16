@@ -1,0 +1,31 @@
+{
+    "name": "kuznetsov-zfort/nova-linkable-metrics",
+    "description": "A Laravel Nova card.",
+    "keywords": [
+        "laravel",
+        "nova",
+        "metrics"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "KuznetsovZfort\\NovaLinkableMetrics\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "KuznetsovZfort\\NovaLinkableMetrics\\CardServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
