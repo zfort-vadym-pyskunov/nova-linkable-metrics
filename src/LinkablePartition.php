@@ -7,11 +7,11 @@ trait LinkablePartition
     use Linkable;
 
     /**
-     * @param mixed $value
+     * @param array $value
      *
      * @return LinkablePartitionResult
      */
-    public function result($value)
+    public function result(array $value)
     {
         $result = new LinkablePartitionResult($value);
         if (!empty($this->url)) {

@@ -7,11 +7,11 @@ trait LinkableTrend
     use Linkable;
 
     /**
-     * @param $value
+     * @param string|null $value
      *
      * @return LinkableTrendResult
      */
-    public function result($value)
+    public function result($value = null)
     {
         $result = new LinkableTrendResult($value);
         if (!empty($this->url)) {
