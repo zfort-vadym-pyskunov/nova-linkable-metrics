@@ -16507,11 +16507,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'LinkablePartitionMetric',
-
     components: {
         BasePartitionMetric: __WEBPACK_IMPORTED_MODULE_1__Base_PartitionMetric___default.a
     },
-
     props: {
         card: {
             type: Object,
@@ -16525,24 +16523,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             type: [Number, String],
             default: ''
         },
-
         lens: {
             type: String,
             default: ''
         }
     },
-
     data: function data() {
         return {
             loading: true,
             chartData: []
         };
     },
-
     created: function created() {
         this.fetch();
     },
-
 
     methods: {
         fetch: function fetch() {
@@ -16673,7 +16667,6 @@ var colorForIndex = function colorForIndex(index) {
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'PartitionMetric',
-
     props: {
         loading: Boolean,
         title: String,
@@ -16683,17 +16676,14 @@ var colorForIndex = function colorForIndex(index) {
             default: ''
         }
     },
-
     data: function data() {
         return { chartist: null };
     },
-
     watch: {
         chartData: function chartData(newData, oldData) {
             this.renderChart();
         }
     },
-
     mounted: function mounted() {
         this.chartist = new __WEBPACK_IMPORTED_MODULE_0_chartist___default.a.Pie(this.$refs.chart, this.formattedChartData, {
             donut: true,
@@ -16710,7 +16700,6 @@ var colorForIndex = function colorForIndex(index) {
         });
     },
 
-
     methods: {
         renderChart: function renderChart() {
             this.chartist.update(this.formattedChartData);
@@ -16719,7 +16708,6 @@ var colorForIndex = function colorForIndex(index) {
             return typeof item.color === 'string' ? item.color : colorForIndex(index);
         }
     },
-
     computed: {
         chartClasses: function chartClasses() {
             return ['vertical-center', 'rounded-b-lg', 'ct-chart', this.formattedTotal <= 0 ? 'invisible' : ''];
@@ -16756,6 +16744,9 @@ var colorForIndex = function colorForIndex(index) {
         },
         formattedTotal: function formattedTotal() {
             return _.sumBy(this.chartData, 'value');
+        },
+        link: function link() {
+            return JSON.parse(this.url);
         }
     }
 });
@@ -16891,7 +16882,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass: "cursor-pointer text-primary dim no-underline",
-                    attrs: { tag: "a", to: this.link, title: _vm.title }
+                    attrs: { tag: "a", to: _vm.link, title: _vm.title }
                   },
                   [
                     _vm._v(
@@ -17076,13 +17067,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'LinkableTrendMetric',
-
     mixins: [__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["InteractsWithDates"]],
-
     components: {
         BaseTrendMetric: __WEBPACK_IMPORTED_MODULE_2__Base_TrendMetric___default.a
     },
-
     props: {
         card: {
             type: Object,
@@ -17096,13 +17084,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             type: [Number, String],
             default: ''
         },
-
         lens: {
             type: String,
             default: ''
         }
     },
-
     data: function data() {
         return {
             loading: true,
@@ -17114,7 +17100,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             selectedRangeKey: null
         };
     },
-
     created: function created() {
         if (this.hasRanges) {
             this.selectedRangeKey = this.card.ranges[0].value;
@@ -17123,7 +17108,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         this.fetch();
     },
-
 
     methods: {
         handleRangeSelected: function handleRangeSelected(key) {
@@ -17162,7 +17146,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         }
     },
-
     computed: {
         hasRanges: function hasRanges() {
             return this.card.ranges.length > 0;
@@ -34475,7 +34458,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'BaseTrendMetric',
-
     props: {
         loading: Boolean,
         title: {},
@@ -34496,21 +34478,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             default: ''
         }
     },
-
     data: function data() {
         return { chartist: null };
     },
-
     watch: {
         selectedRangeKey: function selectedRangeKey(newRange, oldRange) {
             this.renderChart();
         },
-
         chartData: function chartData(newData, oldData) {
             this.renderChart();
         }
     },
-
     mounted: function mounted() {
         var _this = this;
 
@@ -34556,7 +34534,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
     },
 
-
     methods: {
         renderChart: function renderChart() {
             this.chartist.update(this.chartData);
@@ -34565,7 +34542,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit('selected', event.target.value);
         }
     },
-
     computed: {
         isNullValue: function isNullValue() {
             return this.value == null;
@@ -34579,6 +34555,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         formattedSuffix: function formattedSuffix() {
             return Object(__WEBPACK_IMPORTED_MODULE_4_laravel_nova__["SingularOrPlural"])(this.value, this.suffix);
+        },
+        link: function link() {
+            return JSON.parse(this.url);
         }
     }
 });
@@ -34868,7 +34847,7 @@ var render = function() {
                       {
                         staticClass:
                           "cursor-pointer text-primary dim no-underline",
-                        attrs: { tag: "a", to: this.link, title: _vm.title }
+                        attrs: { tag: "a", to: _vm.link, title: _vm.title }
                       },
                       [
                         _vm._v(
@@ -35035,11 +35014,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'LinkableValueMetric',
-
     components: {
         BaseValueMetric: __WEBPACK_IMPORTED_MODULE_1__Base_ValueMetric___default.a
     },
-
     props: {
         card: {
             type: Object,
@@ -35053,13 +35030,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             type: [Number, String],
             default: ''
         },
-
         lens: {
             type: String,
             default: ''
         }
     },
-
     data: function data() {
         return {
             loading: true,
@@ -35071,7 +35046,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             selectedRangeKey: null
         };
     },
-
     created: function created() {
         if (this.hasRanges) {
             this.selectedRangeKey = this.card.ranges[0].value;
@@ -35080,7 +35054,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         this.fetch(this.selectedRangeKey);
     },
-
 
     methods: {
         handleRangeSelected: function handleRangeSelected(key) {
@@ -35109,7 +35082,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         }
     },
-
     computed: {
         hasRanges: function hasRanges() {
             return this.card.ranges.length > 0;
@@ -35285,13 +35257,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             default: ''
         }
     },
-
     methods: {
         handleChange: function handleChange(event) {
             this.$emit('selected', event.target.value);
         }
     },
-
     computed: {
         growthPercentage: function growthPercentage() {
             return Math.abs(this.increaseOrDecrease);
@@ -35370,7 +35340,7 @@ var render = function() {
                       {
                         staticClass:
                           "cursor-pointer text-primary dim no-underline",
-                        attrs: { tag: "a", to: this.link, title: _vm.title }
+                        attrs: { tag: "a", to: _vm.link, title: _vm.title }
                       },
                       [
                         _vm._v(

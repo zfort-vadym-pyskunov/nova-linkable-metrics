@@ -3,7 +3,7 @@
         <div class="flex mb-4">
             <h3 class="mr-3 text-base text-80 font-bold">
                 <template v-if="url">
-                    <router-link tag="a" :to="this.link" :title="title"
+                    <router-link tag="a" :to="link" :title="title"
                                  class="cursor-pointer text-primary dim no-underline">
                         {{ title }}
                     </router-link>
