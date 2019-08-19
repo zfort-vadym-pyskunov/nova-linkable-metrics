@@ -132,6 +132,9 @@
             formattedSuffix() {
                 return SingularOrPlural(this.value, this.suffix);
             },
+            link() {
+                return JSON.parse(this.url);
+            },
         },
     };
 </script>

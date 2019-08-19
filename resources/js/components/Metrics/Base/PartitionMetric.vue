@@ -135,6 +135,9 @@
             formattedTotal() {
                 return _.sumBy(this.chartData, 'value');
             },
+            link() {
+                return JSON.parse(this.url);
+            },
         },
     };
 </script>
