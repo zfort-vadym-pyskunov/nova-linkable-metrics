@@ -2,18 +2,18 @@
 
 namespace KuznetsovZfort\NovaLinkableMetrics;
 
-trait LinkableValue
+trait LinkablePartition
 {
     use Linkable;
 
     /**
      * @param mixed $value
      *
-     * @return LinkableValueResult
+     * @return LinkablePartitionResult
      */
     public function result($value)
     {
-        $result = new LinkableValueResult($value);
+        $result = new LinkablePartitionResult($value);
         if (!empty($this->url)) {
             $result->url($this->url);
         }

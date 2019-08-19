@@ -28,7 +28,6 @@ class CardServiceProvider extends ServiceProvider
      */
     protected function routes()
     {
-        //
     }
 
     /**
@@ -38,6 +37,5 @@ class CardServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 }

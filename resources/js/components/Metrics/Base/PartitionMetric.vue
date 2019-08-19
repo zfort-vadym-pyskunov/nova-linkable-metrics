@@ -33,8 +33,8 @@
 </template>
 
 <script>
-    import Chartist from 'chartist'
-    import 'chartist/dist/chartist.min.css'
+    import Chartist from 'chartist';
+    import 'chartist/dist/chartist.min.css';
 
     const colorForIndex = index =>
         [
@@ -52,7 +52,6 @@
 
     export default {
         name: 'PartitionMetric',
-
         props: {
             loading: Boolean,
             title: String,
@@ -62,15 +61,12 @@
                 default: '',
             },
         },
-
         data: () => ({chartist: null}),
-
         watch: {
             chartData: function (newData, oldData) {
-                this.renderChart()
+                this.renderChart();
             },
         },
-
         mounted() {
             this.chartist = new Chartist.Pie(this.$refs.chart, this.formattedChartData, {
                 donut: true,
@@ -82,21 +78,18 @@
 
             this.chartist.on('draw', context => {
                 if (context.type === 'slice') {
-                    context.element.attr({style: `fill: ${context.meta.color} !important`})
+                    context.element.attr({style: `fill: ${context.meta.color} !important`});
                 }
             })
         },
-
         methods: {
             renderChart() {
                 this.chartist.update(this.formattedChartData);
             },
-
             getItemColor(item, index) {
                 return typeof item.color === 'string' ? item.color : colorForIndex(index);
             },
         },
-
         computed: {
             chartClasses() {
                 return [
@@ -106,11 +99,9 @@
                     this.formattedTotal <= 0 ? 'invisible' : '',
                 ]
             },
-
             formattedChartData() {
                 return {labels: this.formattedLabels, series: this.formattedData};
             },
-
             formattedItems() {
                 return _(this.chartData)
                     .map((item, index) => {
@@ -126,13 +117,11 @@
                     })
                     .value();
             },
-
             formattedLabels() {
                 return _(this.chartData)
                     .map(item => item.label)
                     .value();
             },
-
             formattedData() {
                 return _(this.chartData)
                     .map((item, index) => {
@@ -143,7 +132,6 @@
                     })
                     .value();
             },
-
             formattedTotal() {
                 return _.sumBy(this.chartData, 'value');
             },

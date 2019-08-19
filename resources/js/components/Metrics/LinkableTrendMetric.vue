@@ -15,19 +15,16 @@
 </template>
 
 <script>
-import _ from 'lodash'
-import { InteractsWithDates, Minimum } from 'laravel-nova'
-import BaseTrendMetric from './Base/TrendMetric'
+import _ from 'lodash';
+import { InteractsWithDates, Minimum } from 'laravel-nova';
+import BaseTrendMetric from './Base/TrendMetric';
 
 export default {
     name: 'LinkableTrendMetric',
-
     mixins: [InteractsWithDates],
-
     components: {
         BaseTrendMetric,
     },
-
     props: {
         card: {
             type: Object,
@@ -41,13 +38,11 @@ export default {
             type: [Number, String],
             default: '',
         },
-
         lens: {
             type: String,
             default: '',
         },
     },
-
     data: () => ({
         loading: true,
         value: '',
@@ -57,25 +52,21 @@ export default {
         suffix: '',
         selectedRangeKey: null,
     }),
-
     created() {
         if (this.hasRanges) {
-            this.selectedRangeKey = this.card.ranges[0].value
+            this.selectedRangeKey = this.card.ranges[0].value;
         }
     },
-
     mounted() {
-        this.fetch()
+        this.fetch();
     },
-
     methods: {
         handleRangeSelected(key) {
-            this.selectedRangeKey = key
-            this.fetch()
+            this.selectedRangeKey = key;
+            this.fetch();
         },
-
         fetch() {
-            this.loading = true
+            this.loading = true;
 
             Minimum(Nova.request().get(this.metricEndpoint, this.metricPayload)).then(
                 ({
@@ -83,8 +74,8 @@ export default {
                         value: { labels, trend, value, prefix, suffix, format },
                     },
                 }) => {
-                    this.value = value
-                    this.labels = Object.keys(trend)
+                    this.value = value;
+                    this.labels = Object.keys(trend);
                     this.data = {
                         labels: Object.keys(trend),
                         series: [
@@ -95,48 +86,45 @@ export default {
                                 }
                             }),
                         ],
-                    }
-                    this.format = format || this.format
-                    this.prefix = prefix || this.prefix
-                    this.suffix = suffix || this.suffix
-                    this.loading = false
+                    };
+                    this.format = format || this.format;
+                    this.prefix = prefix || this.prefix;
+                    this.suffix = suffix || this.suffix;
+                    this.loading = false;
                 }
             )
         },
     },
-
     computed: {
         hasRanges() {
-            return this.card.ranges.length > 0
+            return this.card.ranges.length > 0;
         },
-
         metricPayload() {
             const payload = {
                 params: {
                     timezone: this.userTimezone,
                     twelveHourTime: this.usesTwelveHourTime,
                 },
-            }
+            };
 
             if (this.hasRanges) {
                 payload.params.range = this.selectedRangeKey
             }
 
-            return payload
+            return payload;
         },
-
         metricEndpoint() {
-            const lens = this.lens !== '' ? `/lens/${this.lens}` : ''
+            const lens = this.lens !== '' ? `/lens/${this.lens}` : '';
             if (this.resourceName && this.resourceId) {
                 return `/nova-api/${this.resourceName}${lens}/${this.resourceId}/metrics/${
                     this.card.uriKey
-                }`
+                }`;
             } else if (this.resourceName) {
-                return `/nova-api/${this.resourceName}${lens}/metrics/${this.card.uriKey}`
+                return `/nova-api/${this.resourceName}${lens}/metrics/${this.card.uriKey}`;
             } else {
-                return `/nova-api/metrics/${this.card.uriKey}`
+                return `/nova-api/metrics/${this.card.uriKey}`;
             }
         },
     },
-}
+};
 </script>

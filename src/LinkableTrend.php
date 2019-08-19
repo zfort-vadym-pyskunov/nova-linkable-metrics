@@ -2,18 +2,18 @@
 
 namespace KuznetsovZfort\NovaLinkableMetrics;
 
-trait LinkableValue
+trait LinkableTrend
 {
     use Linkable;
 
     /**
-     * @param mixed $value
+     * @param $value
      *
-     * @return LinkableValueResult
+     * @return LinkableTrendResult
      */
     public function result($value)
     {
-        $result = new LinkableValueResult($value);
+        $result = new LinkableTrendResult($value);
         if (!empty($this->url)) {
             $result->url($this->url);
         }

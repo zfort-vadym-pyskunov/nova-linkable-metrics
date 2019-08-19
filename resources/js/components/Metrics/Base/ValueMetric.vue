@@ -94,24 +94,20 @@
                 default: '',
             },
         },
-
         methods: {
             handleChange(event) {
                 this.$emit('selected', event.target.value);
             },
         },
-
         computed: {
             growthPercentage() {
                 return Math.abs(this.increaseOrDecrease);
             },
-
             increaseOrDecrease() {
                 if (this.previous == 0 || this.previous == null || this.value == 0) return 0;
 
                 return (((this.value - this.previous) / this.previous) * 100).toFixed(2);
             },
-
             increaseOrDecreaseLabel() {
                 switch (Math.sign(this.increaseOrDecrease)) {
                     case 1:
@@ -122,7 +118,6 @@
                         return 'Decrease';
                 }
             },
-
             sign() {
                 switch (Math.sign(this.increaseOrDecrease)) {
                     case 1:
@@ -133,23 +128,19 @@
                         return '-';
                 }
             },
-
             isNullValue() {
                 return this.value == null;
             },
-
             formattedValue() {
                 if (!this.isNullValue) {
                     return this.prefix + numeral(this.value).format(this.format);
                 }
 
-                return ''
+                return '';
             },
-
             formattedSuffix() {
                 return SingularOrPlural(this.value, this.suffix);
             },
-
             link() {
                 return JSON.parse(this.url);
             },

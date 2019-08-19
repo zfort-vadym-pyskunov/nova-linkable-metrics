@@ -30,16 +30,15 @@
 </template>
 
 <script>
-    import numeral from 'numeral'
-    import Chartist from 'chartist'
-    import 'chartist-plugin-tooltips'
-    import 'chartist/dist/chartist.min.css'
-    import {SingularOrPlural} from 'laravel-nova'
-    import 'chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css'
+    import numeral from 'numeral';
+    import Chartist from 'chartist';
+    import 'chartist-plugin-tooltips';
+    import 'chartist/dist/chartist.min.css';
+    import {SingularOrPlural} from 'laravel-nova';
+    import 'chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css';
 
     export default {
         name: 'BaseTrendMetric',
-
         props: {
             loading: Boolean,
             title: {},
@@ -58,19 +57,15 @@
                 default: '',
             },
         },
-
         data: () => ({chartist: null}),
-
         watch: {
             selectedRangeKey: function (newRange, oldRange) {
                 this.renderChart();
             },
-
             chartData: function (newData, oldData) {
                 this.renderChart();
             },
         },
-
         mounted() {
             this.chartist = new Chartist.Line(this.$refs.chart, this.chartData, {
                 lineSmooth: Chartist.Interpolation.none(),
@@ -115,22 +110,18 @@
                 ],
             })
         },
-
         methods: {
             renderChart() {
                 this.chartist.update(this.chartData);
             },
-
             handleChange(event) {
                 this.$emit('selected', event.target.value);
             },
         },
-
         computed: {
             isNullValue() {
                 return this.value == null;
             },
-
             formattedValue() {
                 if (!this.isNullValue) {
                     return this.prefix + numeral(this.value).format(this.format);
@@ -138,7 +129,6 @@
 
                 return '';
             },
-
             formattedSuffix() {
                 return SingularOrPlural(this.value, this.suffix);
             },
