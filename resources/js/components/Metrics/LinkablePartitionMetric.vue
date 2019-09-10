@@ -3,7 +3,7 @@
         :title="card.name"
         :chart-data="chartData"
         :loading="loading"
-        :url="this.card.url"
+        :linkable="this.card.linkable"
     />
 </template>
 

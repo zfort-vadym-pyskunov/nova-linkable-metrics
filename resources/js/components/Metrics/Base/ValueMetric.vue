@@ -2,11 +2,18 @@
     <loading-card :loading="loading" class="metric px-6 py-4 relative">
         <div class="flex mb-4">
             <h3 class="mr-3 text-base text-80 font-bold">
-                <template v-if="url">
-                    <router-link tag="a" :to="link" :title="title"
+                <template v-if="linkable.route">
+                    <router-link tag="a" :to="linkable.route" :title="title"
                                  class="cursor-pointer text-primary dim no-underline">
                         {{ title }}
                     </router-link>
+                </template>
+                <template v-else-if="linkable.link">
+                    <a :href="linkable.link.href"
+                       :target="linkable.link.target"
+                       class="cursor-pointer text-primary dim no-underline">
+                        {{ title }}
+                    </a>
                 </template>
                 <template v-else>{{ title }}</template>
             </h3>
@@ -89,9 +96,11 @@
                 type: String,
                 default: '(0[.]00a)',
             },
-            url: {
-                type: String,
-                default: '',
+            linkable: {
+                type: Object,
+                default: () => {
+                    return {};
+                },
             },
         },
         methods: {
@@ -140,9 +149,6 @@
             },
             formattedSuffix() {
                 return SingularOrPlural(this.value, this.suffix);
-            },
-            link() {
-                return JSON.parse(this.url);
             },
         },
     };

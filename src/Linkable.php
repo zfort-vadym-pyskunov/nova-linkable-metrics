@@ -18,20 +18,34 @@ trait Linkable
      */
     public function route(string $routeName, array $params = [], array $query = [])
     {
-        return $this->url(json_encode([
-            'name' => $routeName,
-            'params' => $params,
-            'query' => $query,
-        ]));
+        return $this->withMeta([
+            'linkable' => [
+                'route' => [
+                    'name' => $routeName,
+                    'params' => $params,
+                    'query' => $query,
+                ],
+                'link' => null,
+            ],
+        ]);
     }
 
     /**
-     * @param string $url
+     * @param string $href
+     * @param string $target
      *
      * @return mixed
      */
-    public function url(string $url)
+    public function link(string $href, string $target = '_self')
     {
-        return $this->withMeta(['url' => $url]);
+        return $this->withMeta([
+            'linkable' => [
+                'route' => null,
+                'link' => [
+                    'href' => $href,
+                    'target' => $target,
+                ],
+            ],
+        ]);
     }
 }

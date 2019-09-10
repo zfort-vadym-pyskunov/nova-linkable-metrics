@@ -10,7 +10,7 @@
         :suffix="suffix"
         :selected-range-key="selectedRangeKey"
         :loading="loading"
-        :url="this.card.url"
+        :linkable="this.card.linkable"
     />
 </template>
 

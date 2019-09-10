@@ -1,11 +1,18 @@
 <template>
     <loading-card :loading="loading" class="px-6 py-4">
         <h3 class="flex mb-3 text-base text-80 font-bold">
-            <template v-if="url">
-                <router-link tag="a" :to="link" :title="title"
+            <template v-if="linkable.route">
+                <router-link tag="a" :to="linkable.route" :title="title"
                              class="cursor-pointer text-primary dim no-underline">
                     {{ title }}
                 </router-link>
+            </template>
+            <template v-else-if="linkable.link">
+                <a :href="linkable.link.href"
+                   :target="linkable.link.target"
+                   class="cursor-pointer text-primary dim no-underline">
+                    {{ title }}
+                </a>
             </template>
             <template v-else>{{ title }}</template>
             <span class="ml-auto font-semibold text-70 text-sm">({{ formattedTotal }} {{ __('total') }})</span>
@@ -56,9 +63,11 @@
             loading: Boolean,
             title: String,
             chartData: Array,
-            url: {
-                type: String,
-                default: '',
+            linkable: {
+                type: Object,
+                default: () => {
+                    return {};
+                },
             },
         },
         data: () => ({chartist: null}),
@@ -134,9 +143,6 @@
             },
             formattedTotal() {
                 return _.sumBy(this.chartData, 'value');
-            },
-            link() {
-                return JSON.parse(this.url);
             },
         },
     };
